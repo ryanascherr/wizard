@@ -7,5 +7,9 @@ $(".answer").click(function() {
 });
 
 $(".btn").click(function() {
-    console.log("button");
+    if ($(".answer").hasClass("selected")) {
+        console.log("Nice choice!");
+        return;
+    }
+    console.log("Gotta select something!");
 });
