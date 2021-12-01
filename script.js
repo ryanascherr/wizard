@@ -31,4 +31,5 @@ function handleQuestionChange() {
     console.log("Ya");
     $(".one").slideUp(1000);
     $(".box-box").slideToggle(1000);
+    currentQuestion++;
 }
