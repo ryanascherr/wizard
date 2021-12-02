@@ -8,7 +8,7 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* align-items: center; */
+    align-items: center;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -44,12 +44,19 @@ header {
     border: 2px solid black;
     width: 10px;
     height: 10px;
+    background: linear-gradient(to left, white 50%, #02833E 50%) right;
+    background-size: 200%;
+    transition: 1s ease-out;
 }
 
 .progress-line {
-    border: 2px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
     width: 30px;
-    height: 0;
+    height: 5px;
+    background: linear-gradient(to left, white 50%, #02833E 50%) right;
+    background-size: 200%;
+    transition: 1s ease-out;
 }
 
 .question-box {
@@ -73,4 +80,8 @@ header {
     padding: 10px;
     margin: 10px;
     text-align: center;
+}
+
+.answer:hover {
+    cursor: pointer;
 }

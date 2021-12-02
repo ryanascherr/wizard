@@ -1,5 +1,14 @@
 let currentQuestion = 1;
 
+const games = [
+    {name: 'game 1', console: 'playstation', genre: 'action-adventure'},
+    {name: 'game 2', console: 'xbox', genre: 'FPS'},
+    {name: 'game 3', console: 'switch', genre: 'platformer'},
+    {name: 'game 4', console: 'playstation', genre: 'puzzle'},
+    {name: 'game 5', console: 'xbox', genre: 'survival/horror'},
+    {name: 'game 6', console: 'switch', genre: 'roleplaying game'}
+]
+
 $(".answer").click(function() {
     if (currentQuestion === 1) {
         if ($(this).hasClass("selected")) {
@@ -32,4 +41,6 @@ function handleQuestionChange() {
     $(".one").slideUp(1000);
     $(".box-box").slideToggle(1000);
     currentQuestion++;
+    $(".progress-box-one").css('background-position', 'left');
+    $(".progress-line-one").css('background-position', 'left');
 }
