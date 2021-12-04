@@ -29,18 +29,37 @@ $(".answer").click(function() {
 
 $(".btn").click(function() {
     if ($(".answer").hasClass("selected")) {
-        console.log("Nice choice!");
-        handleQuestionChange();
+        if (currentQuestion === 1) {
+            handleQuestionOneChange();
+            return;
+        }
+        if (currentQuestion === 2) {
+            handleQuestionTwoChange();
+            return;
+        }
         return;
     }
     console.log("Gotta select something!");
 });
 
-function handleQuestionChange() {
-    console.log("Ya");
+function handleQuestionOneChange() {
     $(".one").slideUp(1000);
     $(".box-box").slideToggle(1000);
     currentQuestion++;
     $(".progress-box-one").css('background-position', 'left');
     $(".progress-line-one").css('background-position', 'left');
+    setTimeout(function(){
+        $(".progress-box-two").css('background', '#02833E');
+   }, 1000);
+}
+
+function handleQuestionTwoChange() {
+    $(".one").slideUp(1000);
+    $(".box-box").slideToggle(1000);
+    currentQuestion++;
+    $(".progress-box-two").css('background-position', 'left');
+    $(".progress-line-two").css('background-position', 'left');
+    setTimeout(function(){
+        $(".progress-box-three").css('background', '#02833E');
+   }, 1000);
 }

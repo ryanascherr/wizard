@@ -49,6 +49,11 @@ header {
     transition: 1s ease-out;
 }
 
+.progress-box-one {
+    background: #02833E;
+    background-size: 0;
+}
+
 .progress-line {
     border-top: 1px solid black;
     border-bottom: 1px solid black;
