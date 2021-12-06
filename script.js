@@ -1,4 +1,5 @@
 let currentQuestion = 1;
+let currentAnswer = '';
 
 const games = [
     {name: 'game 1', console: 'playstation', genre: 'action-adventure'},
@@ -7,28 +8,38 @@ const games = [
     {name: 'game 4', console: 'playstation', genre: 'puzzle'},
     {name: 'game 5', console: 'xbox', genre: 'survival/horror'},
     {name: 'game 6', console: 'switch', genre: 'roleplaying game'}
-]
+];
+
+let gameSelection = [];
 
 $(".answer").click(function() {
-    if (currentQuestion === 1) {
-        if ($(this).hasClass("selected")) {
-            $(this).removeClass("selected");
-            return;
-        } else {
-            $(this).addClass("selected");
-        }
+    // if (currentQuestion === 1) {
+    //     if ($(this).hasClass("selected")) {
+    //         $(this).removeClass("selected");
+    //         return;
+    //     } else {
+    //         $(this).addClass("selected");
+    //     }
+    // } else {
+    //     if ($(this).hasClass("selected")) {
+    //         return;
+    //     } else {
+    //         $(".answer").removeClass("selected");
+    //         $(this).addClass("selected");
+    //     }
+    // }
+    currentAnswer = $(this).data("answer");
+    if ($(this).hasClass("selected")) {
+        return;
     } else {
-        if ($(this).hasClass("selected")) {
-            return;
-        } else {
-            $(".answer").removeClass("selected");
-            $(this).addClass("selected");
-        }
+        $(".answer").removeClass("selected");
+        $(this).addClass("selected");
     }
 });
 
 $(".btn").click(function() {
     if ($(".answer").hasClass("selected")) {
+        const games2 = games.filter(game => game.console == currentAnswer);
         if (currentQuestion === 1) {
             handleQuestionOneChange();
             return;
