@@ -1,25 +1,25 @@
 let currentQuestion = 1;
 let currentAnswer = '';
 
-const games = [
-    {name: 'Playstation Casual First-Person Shooter', console: 'playstation', genre: 'fps', casual: 'yes'},
-    {name: 'Playstation Intense First-Person Shooter', console: 'playstation', genre: 'fps', casual: 'no'},
-    {name: 'Playstation Casual Platformer', console: 'playstation', genre: 'platformer', casual: 'yes'},
-    {name: 'Playstation Intense Platformer', console: 'playstation', genre: 'platformer', casual: 'no'},
-    {name: 'Playstation Casual Puzzler', console: 'playstation', genre: 'puzzle', casual: 'yes'},
-    {name: 'Playstation Intense Puzzler', console: 'playstation', genre: 'puzzle', casual: 'no'},
-    {name: 'Xbox Casual First-Person Shooter', console: 'xbox', genre: 'fps', casual: 'yes'},
-    {name: 'Xbox Intense First-Person Shooter', console: 'xbox', genre: 'fps', casual: 'no'},
-    {name: 'Xbox Casual Platformer', console: 'xbox', genre: 'platformer', casual: 'yes'},
-    {name: 'Xbox Intense Platformer', console: 'xbox', genre: 'platformer', casual: 'no'},
-    {name: 'Xbox Casual Puzzler', console: 'xbox', genre: 'puzzle', casual: 'yes'},
-    {name: 'Xbox Intense Puzzler', console: 'xbox', genre: 'puzzle', casual: 'no'},
-    {name: 'Switch Casual First-Person Shooter', console: 'switch', genre: 'fps', casual: 'yes'},
-    {name: 'Switch Intense First-Person Shooter', console: 'switch', genre: 'fps', casual: 'no'},
-    {name: 'Switch Casual Platformer', console: 'switch', genre: 'platformer', casual: 'yes'},
-    {name: 'Switch Intense Platformer', console: 'switch', genre: 'platformer', casual: 'no'},
-    {name: 'Switch Casual Puzzler', console: 'switch', genre: 'puzzle', casual: 'yes'},
-    {name: 'Switch Intense Puzzler', console: 'switch', genre: 'puzzle', casual: 'no'}
+let games = [
+    {name: 'Playstation Casual First-Person Shooter', console: 'playstation', genre: 'fps', intensity: 'casual'},
+    {name: 'Playstation Intense First-Person Shooter', console: 'playstation', genre: 'fps', intensity: 'intense'},
+    {name: 'Playstation Casual Platformer', console: 'playstation', genre: 'platformer', intensity: 'casual'},
+    {name: 'Playstation Intense Platformer', console: 'playstation', genre: 'platformer', intensity: 'intense'},
+    {name: 'Playstation Casual Puzzler', console: 'playstation', genre: 'puzzle', intensity: 'intense'},
+    {name: 'Playstation Intense Puzzler', console: 'playstation', genre: 'puzzle', intensity: 'intense'},
+    {name: 'Xbox Casual First-Person Shooter', console: 'xbox', genre: 'fps', intensity: 'casual'},
+    {name: 'Xbox Intense First-Person Shooter', console: 'xbox', genre: 'fps', intensity: 'intense'},
+    {name: 'Xbox Casual Platformer', console: 'xbox', genre: 'platformer', intensity: 'casual'},
+    {name: 'Xbox Intense Platformer', console: 'xbox', genre: 'platformer', intensity: 'intense'},
+    {name: 'Xbox Casual Puzzler', console: 'xbox', genre: 'puzzle', intensity: 'casual'},
+    {name: 'Xbox Intense Puzzler', console: 'xbox', genre: 'puzzle', intensity: 'intense'},
+    {name: 'Switch Casual First-Person Shooter', console: 'switch', genre: 'fps', intensity: 'casual'},
+    {name: 'Switch Intense First-Person Shooter', console: 'switch', genre: 'fps', intensity: 'intense'},
+    {name: 'Switch Casual Platformer', console: 'switch', genre: 'platformer', intensity: 'casual'},
+    {name: 'Switch Intense Platformer', console: 'switch', genre: 'platformer', intensity: 'intense'},
+    {name: 'Switch Casual Puzzler', console: 'switch', genre: 'puzzle', intensity: 'casual'},
+    {name: 'Switch Intense Puzzler', console: 'switch', genre: 'puzzle', intensity: 'intense'}
 ];
 
 let gameSelection = [];
@@ -51,14 +51,20 @@ $(".answer").click(function() {
 
 $(".btn").click(function() {
     if ($(".answer").hasClass("selected")) {
-        const games2 = games.filter(game => game.console == currentAnswer);
         $(".answer").removeClass("selected");
         if (currentQuestion === 1) {
+            gameSelection = games.filter(game => game.console == currentAnswer);
             handleQuestionOneChange();
             return;
         }
         if (currentQuestion === 2) {
+            gameSelection = gameSelection.filter(game => game.genre == currentAnswer);
             handleQuestionTwoChange();
+            return;
+        }
+        if (currentQuestion === 3) {
+            gameSelection = gameSelection.filter(game => game.intensity == currentAnswer);
+            handleQuestionThreeChange();
             return;
         }
         return;
@@ -68,7 +74,7 @@ $(".btn").click(function() {
 
 function handleQuestionOneChange() {
     $(".one").slideUp(1000);
-    $(".box-box").slideToggle(1000);
+    $(".box-box-one").slideToggle(1000);
     currentQuestion++;
     $(".progress-box-one").css('background-position', 'left');
     $(".progress-line-one").css('background-position', 'left');
@@ -78,12 +84,23 @@ function handleQuestionOneChange() {
 }
 
 function handleQuestionTwoChange() {
-    $(".one").slideUp(1000);
-    $(".box-box").slideToggle(1000);
+    $(".two").slideUp(1000);
+    $(".box-box-two").slideToggle(1000);
     currentQuestion++;
     $(".progress-box-two").css('background-position', 'left');
     $(".progress-line-two").css('background-position', 'left');
     setTimeout(function(){
         $(".progress-box-three").css('background', '#02833E');
+   }, 1000);
+}
+
+function handleQuestionThreeChange() {
+    $(".three").slideUp(1000);
+    $(".box-box-three").slideToggle(1000);
+    currentQuestion++;
+    $(".progress-box-three").css('background-position', 'left');
+    $(".progress-line-three").css('background-position', 'left');
+    setTimeout(function(){
+        $(".progress-box-four").css('background', '#02833E');
    }, 1000);
 }
