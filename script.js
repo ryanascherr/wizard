@@ -2,12 +2,24 @@ let currentQuestion = 1;
 let currentAnswer = '';
 
 const games = [
-    {name: 'game 1', console: 'playstation', genre: 'action-adventure'},
-    {name: 'game 2', console: 'xbox', genre: 'FPS'},
-    {name: 'game 3', console: 'switch', genre: 'platformer'},
-    {name: 'game 4', console: 'playstation', genre: 'puzzle'},
-    {name: 'game 5', console: 'xbox', genre: 'survival/horror'},
-    {name: 'game 6', console: 'switch', genre: 'roleplaying game'}
+    {name: 'Playstation Casual First-Person Shooter', console: 'playstation', genre: 'fps', casual: 'yes'},
+    {name: 'Playstation Intense First-Person Shooter', console: 'playstation', genre: 'fps', casual: 'no'},
+    {name: 'Playstation Casual Platformer', console: 'playstation', genre: 'platformer', casual: 'yes'},
+    {name: 'Playstation Intense Platformer', console: 'playstation', genre: 'platformer', casual: 'no'},
+    {name: 'Playstation Casual Puzzler', console: 'playstation', genre: 'puzzle', casual: 'yes'},
+    {name: 'Playstation Intense Puzzler', console: 'playstation', genre: 'puzzle', casual: 'no'},
+    {name: 'Xbox Casual First-Person Shooter', console: 'xbox', genre: 'fps', casual: 'yes'},
+    {name: 'Xbox Intense First-Person Shooter', console: 'xbox', genre: 'fps', casual: 'no'},
+    {name: 'Xbox Casual Platformer', console: 'xbox', genre: 'platformer', casual: 'yes'},
+    {name: 'Xbox Intense Platformer', console: 'xbox', genre: 'platformer', casual: 'no'},
+    {name: 'Xbox Casual Puzzler', console: 'xbox', genre: 'puzzle', casual: 'yes'},
+    {name: 'Xbox Intense Puzzler', console: 'xbox', genre: 'puzzle', casual: 'no'},
+    {name: 'Switch Casual First-Person Shooter', console: 'switch', genre: 'fps', casual: 'yes'},
+    {name: 'Switch Intense First-Person Shooter', console: 'switch', genre: 'fps', casual: 'no'},
+    {name: 'Switch Casual Platformer', console: 'switch', genre: 'platformer', casual: 'yes'},
+    {name: 'Switch Intense Platformer', console: 'switch', genre: 'platformer', casual: 'no'},
+    {name: 'Switch Casual Puzzler', console: 'switch', genre: 'puzzle', casual: 'yes'},
+    {name: 'Switch Intense Puzzler', console: 'switch', genre: 'puzzle', casual: 'no'}
 ];
 
 let gameSelection = [];
@@ -40,6 +52,7 @@ $(".answer").click(function() {
 $(".btn").click(function() {
     if ($(".answer").hasClass("selected")) {
         const games2 = games.filter(game => game.console == currentAnswer);
+        $(".answer").removeClass("selected");
         if (currentQuestion === 1) {
             handleQuestionOneChange();
             return;
