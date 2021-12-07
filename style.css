@@ -46,7 +46,7 @@ header {
     height: 10px;
     background: linear-gradient(to left, white 50%, #02833E 50%) right;
     background-size: 200%;
-    transition: 1s ease-out;
+    transition: .25s ease-out;
 }
 
 .progress-box-one {

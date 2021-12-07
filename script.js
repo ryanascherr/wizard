@@ -95,6 +95,9 @@ function handleQuestionTwoChange() {
 }
 
 function handleQuestionThreeChange() {
+    console.log("three");
+    $(".btn").addClass("hidden");
+    $(".game").html(gameSelection[0].name);
     $(".three").slideUp(1000);
     $(".box-box-three").slideToggle(1000);
     currentQuestion++;
