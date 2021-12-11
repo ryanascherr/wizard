@@ -1,7 +1,11 @@
+:root {
+    --green: #02833E;
+}
+
 body {
     margin: 0;
     padding: 0;
-    color: #02833E;
+    color: var(--green);
 }
 
 main {
@@ -19,7 +23,7 @@ h1, h2, h3, h4, h5, h6 {
 
 header {
     color: white;
-    background-color: #02833E;
+    background-color: var(--green);
     padding: 10px 0;
     margin-bottom: 15px;
 }
@@ -29,7 +33,7 @@ header {
 }
 
 .selected {
-    background-color: #02833E;
+    background-color: var(--green);
     color: white;
 }
 
@@ -44,13 +48,13 @@ header {
     border: 2px solid black;
     width: 10px;
     height: 10px;
-    background: linear-gradient(to left, white 50%, #02833E 50%) right;
+    background: linear-gradient(to left, white 50%, var(--green) 50%) right;
     background-size: 200%;
     transition: .25s ease-out;
 }
 
 .progress-box-one {
-    background: #02833E;
+    background: var(--green);
     background-size: 0;
 }
 
@@ -69,24 +73,28 @@ header {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-bottom: 5px;
 }
 
 .question {
-    margin-bottom: 15px;
     padding: 0 10px;
 }
-
-/* .answers {
-    grid: 10px;
-} */
 
 .answer {
     border: 2px solid black;
     padding: 10px;
-    margin: 10px;
+    margin: 15px;
     text-align: center;
+    transition: .25s;
 }
 
 .answer:hover {
     cursor: pointer;
+    border: 2px solid var(--green);
+}
+
+@media only screen and (min-width: 426px) {
+    .answers {
+        display: flex;
+    }
 }

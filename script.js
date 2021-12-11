@@ -33,7 +33,7 @@ $(".answer").click(function() {
     }
 });
 
-$(".btn").click(function() {
+$(".enter-btn").click(function() {
     if ($(".answer").hasClass("selected")) {
         $(".answer").removeClass("selected");
         if (currentQuestion === 1) {
@@ -56,16 +56,16 @@ function handleQuestionChange() {
     let currentBox = $(".question-box")
     [currentQuestion-1];
     $(currentBox).slideUp(1000);
-    let currentBoxBox = $(".test")[currentQuestion-1];
+    let currentBoxBox = $(".box-box")[currentQuestion-1];
     $(currentBoxBox).slideToggle(1000);
     let progressLine = $(".progress-line")[currentQuestion-1];
     $(progressLine).css('background-position', 'left');
     let progressBox = $(".progress-box")[currentQuestion];
     if (currentQuestion === 3) {
         $(".game").text(gameSelection[0].name);
-        $(".btn").addClass("hidden");
+        $(".enter-btn").addClass("hidden");
    }
     setTimeout(function(){
         $(progressBox).css('background', '#02833E');
    }, 1000);
-}
+};
