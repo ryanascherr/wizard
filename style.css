@@ -6,6 +6,7 @@ body {
     margin: 0;
     padding: 0;
     color: var(--green);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 main {
@@ -21,11 +22,21 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0;
 }
 
+img {
+    width: 100%;
+    filter: invert(26%) sepia(89%) saturate(1583%) hue-rotate(95deg) brightness(96%) contrast(106%);
+    transition: .25s;
+}
+
 header {
     color: white;
     background-color: var(--green);
     padding: 10px 0;
     margin-bottom: 15px;
+}
+
+header h1 {
+    margin-bottom: 10px;
 }
 
 .hidden {
@@ -35,6 +46,11 @@ header {
 .selected {
     background-color: var(--green);
     color: white;
+    border: 2px solid black;
+}
+
+.selected img {
+    filter: invert(100%) sepia(16%) saturate(7463%) hue-rotate(222deg) brightness(119%) contrast(115%);
 }
 
 .progress-bar {
@@ -63,7 +79,7 @@ header {
     border-bottom: 1px solid black;
     width: 30px;
     height: 5px;
-    background: linear-gradient(to left, white 50%, #02833E 50%) right;
+    background: linear-gradient(to left, white 50%, var(--green) 50%) right;
     background-size: 200%;
     transition: 1s ease-out;
 }
@@ -80,11 +96,21 @@ header {
     padding: 0 10px;
 }
 
+.img-container {
+    max-width: 100px;
+}
+
 .answer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
     border: 2px solid black;
     padding: 10px;
     margin: 15px;
     text-align: center;
+    font-weight: bold;
     transition: .25s;
 }
 
@@ -93,7 +119,7 @@ header {
     border: 2px solid var(--green);
 }
 
-@media only screen and (min-width: 426px) {
+@media only screen and (min-width: 780px) {
     .answers {
         display: flex;
     }
