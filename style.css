@@ -23,12 +23,6 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0;
 }
 
-img {
-    width: 100%;
-    filter: invert(26%) sepia(89%) saturate(1583%) hue-rotate(95deg) brightness(96%) contrast(106%);
-    transition: .25s;
-}
-
 button {
     background-color: var(--blue);
     color: white;
@@ -64,10 +58,6 @@ header h1 {
     background-color: var(--green);
     color: white;
     border: 2px solid black;
-}
-
-.selected img {
-    filter: invert(100%) sepia(16%) saturate(7463%) hue-rotate(222deg) brightness(119%) contrast(115%);
 }
 
 .progress-bar {
@@ -134,7 +124,20 @@ header h1 {
 
 .answer:hover {
     cursor: pointer;
-    /* border: 2px solid var(--green); */
+}
+
+.answer img {
+    width: 100%;
+    filter: invert(26%) sepia(89%) saturate(1583%) hue-rotate(95deg) brightness(96%) contrast(106%);
+    transition: .25s;
+}
+
+.selected img {
+    filter: invert(100%) sepia(16%) saturate(7463%) hue-rotate(222deg) brightness(119%) contrast(115%);
+}
+
+.game-img {
+    width: 100%;
 }
 
 @media only screen and (min-width: 780px) {

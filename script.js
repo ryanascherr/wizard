@@ -3,12 +3,12 @@ let currentAnswer = '';
 let gameSelection = [];
 
 let games = [
-    {name: 'Playstation Casual First-Person Shooter', console: 'playstation', genre: 'fps', intensity: 'casual'},
-    {name: 'Playstation Intense First-Person Shooter', console: 'playstation', genre: 'fps', intensity: 'intense'},
-    {name: 'Playstation Casual Platformer', console: 'playstation', genre: 'platformer', intensity: 'casual'},
-    {name: 'Playstation Intense Platformer', console: 'playstation', genre: 'platformer', intensity: 'intense'},
-    {name: 'Playstation Casual Puzzler', console: 'playstation', genre: 'puzzle', intensity: 'intense'},
-    {name: 'Playstation Intense Puzzler', console: 'playstation', genre: 'puzzle', intensity: 'intense'},
+    {name: 'Paladins: Champions of the Realm', console: 'playstation', genre: 'fps', intensity: 'casual', url: 'https://www.paladins.com/', img: './img/games/paladins.jpeg'},
+    {name: 'Killzone: Shadow Fall', console: 'playstation', genre: 'fps', intensity: 'intense'},
+    {name: 'Sackboy: A Big Adventure', console: 'playstation', genre: 'platformer', intensity: 'casual'},
+    {name: 'Dying Light', console: 'playstation', genre: 'platformer', intensity: 'intense'},
+    {name: 'The Pedestrian', console: 'playstation', genre: 'puzzle', intensity: 'casual'},
+    {name: 'Little Nightmares II', console: 'playstation', genre: 'puzzle', intensity: 'intense'},
     {name: 'Xbox Casual First-Person Shooter', console: 'xbox', genre: 'fps', intensity: 'casual'},
     {name: 'Xbox Intense First-Person Shooter', console: 'xbox', genre: 'fps', intensity: 'intense'},
     {name: 'Xbox Casual Platformer', console: 'xbox', genre: 'platformer', intensity: 'casual'},
@@ -53,6 +53,13 @@ $(".enter-btn").click(function() {
 });
 
 function handleQuestionChange() {
+    if (currentQuestion === 3) {
+        $(".game-name").text(gameSelection[0].name);
+        $(".game-img").attr('src', gameSelection[0].img);
+        $(".game-website").attr('href', gameSelection[0].url);
+        $(".enter-btn").addClass("hidden");
+        $(".restart-btn").removeClass("hidden");
+    };
     let currentBox = $(".question-box")
     [currentQuestion-1];
     $(currentBox).slideUp(1000);
@@ -61,11 +68,11 @@ function handleQuestionChange() {
     let progressLine = $(".progress-line")[currentQuestion-1];
     $(progressLine).css('background-position', 'left');
     let progressBox = $(".progress-box")[currentQuestion];
-    if (currentQuestion === 3) {
-        $(".game").text(gameSelection[0].name);
-        $(".enter-btn").addClass("hidden");
-   }
     setTimeout(function(){
         $(progressBox).css('background', '#02833E');
-   }, 1000);
+    }, 1000);
 };
+
+$(".restart-btn").click(function(){
+    location.reload();
+})
