@@ -77,8 +77,8 @@ header h1, header h3 {
 
 .progress-box {
     border: 2px solid var(--blue);
-    width: 10px;
-    height: 10px;
+    width: 15px;
+    height: 15px;
     background: linear-gradient(to left, white 50%, var(--green) 50%) right;
     background-size: 200%;
     transition: .25s ease-out;
@@ -90,10 +90,11 @@ header h1, header h3 {
 }
 
 .progress-line {
-    border-top: 1px solid var(--blue);
-    border-bottom: 1px solid var(--blue);
-    width: 30px;
-    height: 5px;
+    border-top: 2px solid var(--blue);
+    border-bottom: 2px solid var(--blue);
+    width: 50px;
+    min-width: 30px;
+    height: 7.5px;
     background: linear-gradient(to left, white 50%, var(--green) 50%) right;
     background-size: 200%;
     transition: 1s ease-out;
@@ -149,7 +150,7 @@ header h1, header h3 {
 }
 
 .game-img-container {
-    max-width: 500px;
+    max-width: 300px;
     border: 2px solid var(--blue);
     margin-top: 15px;
 }
@@ -159,7 +160,19 @@ header h1, header h3 {
 }
 
 @media only screen and (min-width: 780px) {
+
     .answers {
         display: flex;
     }
+
+    .progress-box {
+        width: 20px;
+        height: 20px;
+    }
+
+    .progress-line {
+        height: 10px;
+        width: 150px;
+    }
+
 }
