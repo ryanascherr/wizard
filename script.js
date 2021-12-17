@@ -1,5 +1,6 @@
 let currentQuestion = 1;
 let currentAnswer = '';
+let currentImg = '';
 let gameSelection = [];
 
 let games = [
@@ -25,6 +26,7 @@ let games = [
 
 $(".answer").click(function() {
     currentAnswer = $(this).data("answer");
+    currentImg = $(this).data("img");
     if ($(this).hasClass("selected")) {
         return;
     } else {
@@ -53,9 +55,11 @@ $(".enter-btn").click(function() {
 });
 
 function handleQuestionChange() {
+    console.log(currentImg);
     if (currentQuestion === 3) {
         $(".game-name").text(gameSelection[0].name);
-        $(".game-img").attr('src', gameSelection[0].img);
+        let test = $(".game-img")[3];
+        $(test).attr('src', gameSelection[0].img);
         $(".game-website").attr('href', gameSelection[0].url);
         $(".enter-btn").addClass("hidden");
         $(".restart-btn").removeClass("hidden");
@@ -68,6 +72,8 @@ function handleQuestionChange() {
     let progressLine = $(".progress-line")[currentQuestion-1];
     $(progressLine).css('background-position', 'left');
     let progressBox = $(".progress-box")[currentQuestion];
+    let boxImg = $(".game-img")[currentQuestion-1];
+    $(boxImg).attr('src', currentImg);
     setTimeout(function(){
         $(progressBox).css('background', '#02833E');
     }, 1000);

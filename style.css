@@ -77,8 +77,8 @@ header h1, header h3 {
 
 .progress-box {
     border: 2px solid var(--blue);
-    width: 15px;
-    height: 15px;
+    width: 30px;
+    height: 30px;
     background: linear-gradient(to left, white 50%, var(--green) 50%) right;
     background-size: 200%;
     transition: .25s ease-out;
@@ -145,6 +145,10 @@ header h1, header h3 {
     filter: invert(100%) sepia(16%) saturate(7463%) hue-rotate(222deg) brightness(119%) contrast(115%);
 }
 
+.progress-box img {
+    filter: invert(100%) sepia(16%) saturate(7463%) hue-rotate(222deg) brightness(119%) contrast(115%);
+}
+
 .game-name, .game-website-container, .restart-btn {
     margin-top: 15px;
 }
@@ -166,8 +170,8 @@ header h1, header h3 {
     }
 
     .progress-box {
-        width: 20px;
-        height: 20px;
+        width: 45px;
+        height: 45px;
     }
 
     .progress-line {
