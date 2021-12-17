@@ -162,6 +162,11 @@ header h1, header h3 {
 
 .game-img {
     width: 100%;
+    transition: 1s;
+}
+
+.opacity-zero {
+    opacity: 0;
 }
 
 @media only screen and (min-width: 780px) {

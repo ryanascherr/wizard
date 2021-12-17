@@ -71,9 +71,10 @@ function handleQuestionChange() {
     $(currentBoxBox).slideToggle(1000);
     let progressLine = $(".progress-line")[currentQuestion-1];
     $(progressLine).css('background-position', 'left');
-    let progressBox = $(".progress-box")[currentQuestion];
     let boxImg = $(".game-img")[currentQuestion-1];
     $(boxImg).attr('src', currentImg);
+    $(boxImg).css('opacity', '100');
+    let progressBox = $(".progress-box")[currentQuestion];
     setTimeout(function(){
         $(progressBox).css('background', '#02833E');
     }, 1000);
