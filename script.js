@@ -55,11 +55,10 @@ $(".enter-btn").click(function() {
 });
 
 function handleQuestionChange() {
-    console.log(currentImg);
     if (currentQuestion === 3) {
         $(".game-name").text(gameSelection[0].name);
-        let test = $(".game-img")[3];
-        $(test).attr('src', gameSelection[0].img);
+        let selectedGame = $(".game-img")[3];
+        $(selectedGame).attr('src', gameSelection[0].img);
         $(".game-website").attr('href', gameSelection[0].url);
         $(".enter-btn").addClass("hidden");
         $(".restart-btn").removeClass("hidden");
