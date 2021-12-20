@@ -40,6 +40,8 @@ button:hover {
     color: var(--blue);
 }
 
+/*Header*/
+
 header {
     color: white;
     background-color: var(--green);
@@ -58,6 +60,8 @@ header h1, header h3 {
     padding: 0 15px;
 }
 
+/*Misc*/
+
 .hidden {
     display: none;
 }
@@ -67,6 +71,16 @@ header h1, header h3 {
     color: white;
     border: 2px solid black;
 }
+
+.opacity-zero {
+    opacity: 0;
+}
+
+.error-message-container {
+    margin-bottom: 15px;
+}
+
+/*Progress Bar*/
 
 .progress-bar {
     display: flex;
@@ -100,6 +114,8 @@ header h1, header h3 {
     background-size: 200%;
     transition: 1s ease-out;
 }
+
+/*Questions and Answers*/
 
 .question-answer-container {
     display: flex;
@@ -165,13 +181,7 @@ header h1, header h3 {
     transition: 1s;
 }
 
-.opacity-zero {
-    opacity: 0;
-}
-
-.error-message-container {
-    margin-bottom: 15px;
-}
+/*Media Queries*/
 
 @media only screen and (min-width: 780px) {
 
