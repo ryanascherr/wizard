@@ -27,8 +27,10 @@ let games = [
 $(".answer").click(function() {
     currentAnswer = $(this).data("answer");
     currentImg = $(this).data("img");
+    //if answer is already selected, nothing happens
     if ($(this).hasClass("selected")) {
         return;
+    //if selected answer is not already selected, select it
     } else {
         $(".answer").removeClass("selected");
         $(this).addClass("selected");
@@ -38,6 +40,7 @@ $(".answer").click(function() {
 $(".enter-btn").click(function() {
     if ($(".answer").hasClass("selected")) {
         $(".answer").removeClass("selected");
+        //filter gameSelection on criteria depending on question answered
         if (currentQuestion === 1) {
             gameSelection = games.filter(game => game.console == currentAnswer);
         }
@@ -47,27 +50,32 @@ $(".enter-btn").click(function() {
         if (currentQuestion === 3) {
             gameSelection = gameSelection.filter(game => game.intensity == currentAnswer);
         }
+        $(".error-message").text("");
         handleQuestionChange();
         currentQuestion++;
         return;
     }
-    console.log("Gotta select something!");
+    $(".error-message").text("Please select one of the answers.");
 });
 
 function handleQuestionChange() {
+    //if last question has been answered, show game
     if (currentQuestion === 3) {
         $(".game-name").text(gameSelection[0].name);
-        let selectedGame = $(".game-img")[3];
-        $(selectedGame).attr('src', gameSelection[0].img);
+        let selectedGameImg = $(".game-img")[3];
+        $(selectedGameImg).attr('src', gameSelection[0].img);
         $(".game-website").attr('href', gameSelection[0].url);
         $(".enter-btn").addClass("hidden");
         $(".restart-btn").removeClass("hidden");
     };
-    let currentBox = $(".question-box")
+    //hide previous question
+    let previousQuestion = $(".js-container")
     [currentQuestion-1];
-    $(currentBox).slideUp(1000);
-    let currentBoxBox = $(".box-box")[currentQuestion-1];
-    $(currentBoxBox).slideToggle(1000);
+    $(previousQuestion).slideUp(1000);
+    //show next question
+    let nextQuestion = $(".js-container")[currentQuestion];
+    $(nextQuestion).slideToggle(1000);
+    //update progress bar
     let progressLine = $(".progress-line")[currentQuestion-1];
     $(progressLine).css('background-position', 'left');
     let boxImg = $(".game-img")[currentQuestion-1];

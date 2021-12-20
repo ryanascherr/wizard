@@ -101,7 +101,7 @@ header h1, header h3 {
     transition: 1s ease-out;
 }
 
-.question-box {
+.question-answer-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -167,6 +167,10 @@ header h1, header h3 {
 
 .opacity-zero {
     opacity: 0;
+}
+
+.error-message-container {
+    margin-bottom: 15px;
 }
 
 @media only screen and (min-width: 780px) {

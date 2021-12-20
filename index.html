@@ -10,7 +10,7 @@
 <body>
     <header>
         <h1>Video Game Chooser</h1>
-        <h3>Where you can find the best game for you</h3>
+        <h3>Find the best game for you!</h3>
     </header>
     <main>
         <div class="progress-bar">
@@ -26,32 +26,34 @@
                 <img class="game-img opacity-zero" src="" alt="">
             </div>
         </div>
-        <div class="question-box">
-            <h2 class="question">What console do you want this game to be on?</h2>
-            <div class="answers">
-                <div class="answer" data-answer="playstation" data-img="./img/playstation.png">
-                    <div class="img-container">
-                        <img src="./img/playstation.png" alt="">
+        <div class="js-container">
+            <div class="question-answer-container">
+                <h2 class="question">What console do you want this game to be on?</h2>
+                <div class="answers">
+                    <div class="answer" data-answer="playstation" data-img="./img/playstation.png">
+                        <div class="img-container">
+                            <img src="./img/playstation.png" alt="">
+                        </div>
+                        <p>PLAYSTATION 5</p>
                     </div>
-                    <p>PLAYSTATION 5</p>
-                </div>
-                <div class="answer" data-answer="xbox" data-img="./img/xbox.png">
-                    <div class="img-container">
-                        <img src="./img/xbox.png" alt="">
+                    <div class="answer" data-answer="xbox" data-img="./img/xbox.png">
+                        <div class="img-container">
+                            <img src="./img/xbox.png" alt="">
+                        </div>
+                        <p>XBOX ONE X</p>
                     </div>
-                    <p>XBOX ONE X</p>
-                </div>
-                <div class="answer" data-answer="switch" data-img="./img/nintendo.png">
-                    <div class="img-container">
-                        <img src="./img/nintendo.png" alt="">
+                    <div class="answer" data-answer="switch" data-img="./img/nintendo.png">
+                        <div class="img-container">
+                            <img src="./img/nintendo.png" alt="">
+                        </div>
+                        <p>NINTENDO SWITCH</p>
                     </div>
-                    <p>NINTENDO SWITCH</p>
                 </div>
             </div>
         </div>
-        <div class="box-box hidden">
-            <div class="question-box">
-                <h2 class="question question-two">What genre do you want the game to be?</h2>
+        <div class="js-container hidden">
+            <div class="question-answer-container">
+                <h2 class="question">What genre do you want the game to be?</h2>
                 <div class="answers">
                     <div class="answer" data-answer="fps" data-img="./img/fps.png">
                         <div class="img-container">
@@ -74,9 +76,9 @@
                 </div>
             </div>
         </div>
-        <div class="box-box hidden">
-            <div class="question-box">
-                <h2 class="question question-two">Do you want this to be a casual game or an intense game?</h2>
+        <div class="js-container hidden">
+            <div class="question-answer-container">
+                <h2 class="question">Do you want this to be a casual game or an intense game?</h2>
                     <div class="answers answers-three">
                     <div class="answer" data-answer="casual" data-img="./img/casual.png">
                         <div class="img-container">
@@ -93,7 +95,7 @@
                 </div>
             </div>
         </div>
-        <div class="box-box hidden">
+        <div class="js-container hidden">
             <div class="question-box four">
                 <h2 class="question question-four">Your game is...</h2>
                     <h1 class="game-name"></h1>
@@ -104,6 +106,9 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="error-message-container">
+            <h2 class="error-message"></h2>
         </div>
         <button class="enter-btn">
             <h2>Enter</h2>
