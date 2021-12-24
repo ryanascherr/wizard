@@ -1,7 +1,9 @@
 let currentQuestion = 1;
-let currentAnswer = '';
-let currentImg = '';
+let selectedAnswer = '';
+let selectedImg = '';
 let gameSelection = [];
+
+//command shift L
 
 let games = [
     {name: 'Paladins: Champions of the Realm', console: 'playstation', genre: 'fps', intensity: 'casual', url: 'https://www.paladins.com/', img: './img/games/paladins.jpeg'},
@@ -25,37 +27,46 @@ let games = [
 ];
 
 $(".answer").click(function() {
-    currentAnswer = $(this).data("answer");
-    currentImg = $(this).data("img");
-    //if answer is already selected, nothing happens
-    if ($(this).hasClass("selected")) {
-        return;
-    //if selected answer is not already selected, select it
-    } else {
+    selectedAnswer = $(this).data("answer");
+    selectedImg = $(this).data("img");
+
+    // $(".answer").removeClass("selected");
+    // $(this).addClass("selected");
+
+    let isAnswerSelected = ($(this).hasClass("selected"));
+
+    if (!isAnswerSelected) {
         $(".answer").removeClass("selected");
         $(this).addClass("selected");
     }
 });
 
-$(".enter-btn").click(function() {
-    if ($(".answer").hasClass("selected")) {
-        $(".answer").removeClass("selected");
-        //filter gameSelection on criteria depending on question answered
-        if (currentQuestion === 1) {
+$(".submit-btn").click(function() {
+
+    let isAnswerSelected = ($('.answer').hasClass("selected"));
+    let isOnConsoleQuestion = (currentQuestion === 1);
+    let isOnGenreQuestion = (currentQuestion === 2);
+    let isOnIntensityQuestion = (currentQuestion === 3);
+
+    if (!isAnswerSelected) {
+        $(".error-message").text("Please select one of the answers.");
+        return;
+    };
+
+    if (isAnswerSelected) {
+        if (isOnConsoleQuestion) {
             gameSelection = games.filter(game => game.console == currentAnswer);
-        }
-        if (currentQuestion === 2) {
+        };
+        if (isOnGenreQuestion) {
             gameSelection = gameSelection.filter(game => game.genre == currentAnswer);
-        }
-        if (currentQuestion === 3) {
+        };
+        if (isOnIntensityQuestion) {
             gameSelection = gameSelection.filter(game => game.intensity == currentAnswer);
-        }
+        };
         $(".error-message").text("");
         handleQuestionChange();
         currentQuestion++;
-        return;
     }
-    $(".error-message").text("Please select one of the answers.");
 });
 
 function handleQuestionChange() {
