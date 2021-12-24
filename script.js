@@ -1,9 +1,7 @@
-let currentQuestion = 1;
+let questionNumber = 1;
 let selectedAnswer = '';
-let selectedImg = '';
+let selectedAnswerImage = '';
 let gameSelection = [];
-
-//command shift L
 
 let games = [
     {name: 'Paladins: Champions of the Realm', console: 'playstation', genre: 'fps', intensity: 'casual', url: 'https://www.paladins.com/', img: './img/games/paladins.jpeg'},
@@ -27,10 +25,10 @@ let games = [
 ];
 
 $(".answer").click(function() {
-    selectedAnswer = $(this).data("answer");
-    selectedImg = $(this).data("img");
-
     let isAnswerSelected = ($(this).hasClass("selected"));
+
+    selectedAnswer = $(this).data("answer");
+    selectedAnswerImage = $(this).data("img");
 
     if (!isAnswerSelected) {
         $(".answer").removeClass("selected");
@@ -40,9 +38,9 @@ $(".answer").click(function() {
 
 $(".submit-btn").click(function() {
     let isAnswerSelected = ($('.answer').hasClass("selected"));
-    let isOnConsoleQuestion = (currentQuestion === 1);
-    let isOnGenreQuestion = (currentQuestion === 2);
-    let isOnIntensityQuestion = (currentQuestion === 3);
+    let isOnConsoleQuestion = (questionNumber === 1);
+    let isOnGenreQuestion = (questionNumber === 2);
+    let isOnIntensityQuestion = (questionNumber === 3);
 
     if (!isAnswerSelected) {
         $(".error-message").text("Please select one of the answers.");
@@ -52,27 +50,23 @@ $(".submit-btn").click(function() {
     if (isAnswerSelected) {
         if (isOnConsoleQuestion) {
             gameSelection = games.filter(game => game.console == selectedAnswer);
-            console.log(gameSelection);
         };
         if (isOnGenreQuestion) {
             gameSelection = gameSelection.filter(game => game.genre == selectedAnswer);
-            console.log(gameSelection);
         };
         if (isOnIntensityQuestion) {
             gameSelection = gameSelection.filter(game => game.intensity == selectedAnswer);
-            console.log(gameSelection);
         };
         $(".error-message").text("");
         handleQuestionChange();
-        currentQuestion++;
+        questionNumber++;
     }
 });
 
 function handleQuestionChange() {
-    //if last question has been answered, show game
-    let isOnFinalQuestion = (currentQuestion === 3);
+    let isOnFinalQuestion = (questionNumber === 3);
     if (isOnFinalQuestion) {
-        handleShowFinalGame()
+        handleShowFinalGame();
     };
 
     handleShowNewQuestion();
@@ -80,31 +74,31 @@ function handleQuestionChange() {
 };
 
 function handleShowNewQuestion() {
-    let previousQuestion = $(".js-container")[currentQuestion-1];
-    $(previousQuestion).slideUp(500);
-    let nextQuestion = $(".js-container")[currentQuestion];
-    $(nextQuestion).slideToggle(500);
+    let questionJustAnswered = $(".js-container")[questionNumber-1];
+    $(questionJustAnswered).slideUp(500);
+    let newQuestion = $(".js-container")[questionNumber];
+    $(newQuestion).slideDown(500);
 };
 
 function handleUpdateProgressBar() {
-    let progressLine = $(".progress-line")[currentQuestion-1];
+    let progressLine = $(".progress-line")[questionNumber-1];
     $(progressLine).css('background-position', 'left');
-    let progressBoxImg = $(".game-img")[currentQuestion-1];
-    $(progressBoxImg).attr('src', selectedImg).css('opacity', '100');
-    let progressBox = $(".progress-box")[currentQuestion];
+    let progressBoxImage = $(".game-img")[questionNumber-1];
+    $(progressBoxImage).attr('src', selectedAnswerImage).css('opacity', '100');
+    let progressBox = $(".progress-box")[questionNumber];
     setTimeout(function(){
         $(progressBox).css('background', '#02833E');
-    }, 1000);
+    }, 500);
 };
 
 function handleShowFinalGame() {
-    console.log(gameSelection);
     $(".game-name").text(gameSelection[0].name);
-    let selectedGameImg = $(".game-img")[3];
-    $(selectedGameImg).attr('src', gameSelection[0].img);
+    $(".js-game-img").attr('src', gameSelection[0].img);
     $(".game-website").attr('href', gameSelection[0].url);
-    $(".enter-btn").addClass("hidden");
+    $(".submit-btn").addClass("hidden");
     $(".restart-btn").removeClass("hidden");
+    $('.js-game-img').on('load', function() {
+    });
 }
 
 $(".restart-btn").click(function(){
