@@ -30,9 +30,6 @@ $(".answer").click(function() {
     selectedAnswer = $(this).data("answer");
     selectedImg = $(this).data("img");
 
-    // $(".answer").removeClass("selected");
-    // $(this).addClass("selected");
-
     let isAnswerSelected = ($(this).hasClass("selected"));
 
     if (!isAnswerSelected) {
@@ -42,7 +39,6 @@ $(".answer").click(function() {
 });
 
 $(".submit-btn").click(function() {
-
     let isAnswerSelected = ($('.answer').hasClass("selected"));
     let isOnConsoleQuestion = (currentQuestion === 1);
     let isOnGenreQuestion = (currentQuestion === 2);
@@ -55,13 +51,16 @@ $(".submit-btn").click(function() {
 
     if (isAnswerSelected) {
         if (isOnConsoleQuestion) {
-            gameSelection = games.filter(game => game.console == currentAnswer);
+            gameSelection = games.filter(game => game.console == selectedAnswer);
+            console.log(gameSelection);
         };
         if (isOnGenreQuestion) {
-            gameSelection = gameSelection.filter(game => game.genre == currentAnswer);
+            gameSelection = gameSelection.filter(game => game.genre == selectedAnswer);
+            console.log(gameSelection);
         };
         if (isOnIntensityQuestion) {
-            gameSelection = gameSelection.filter(game => game.intensity == currentAnswer);
+            gameSelection = gameSelection.filter(game => game.intensity == selectedAnswer);
+            console.log(gameSelection);
         };
         $(".error-message").text("");
         handleQuestionChange();
@@ -71,32 +70,42 @@ $(".submit-btn").click(function() {
 
 function handleQuestionChange() {
     //if last question has been answered, show game
-    if (currentQuestion === 3) {
-        $(".game-name").text(gameSelection[0].name);
-        let selectedGameImg = $(".game-img")[3];
-        $(selectedGameImg).attr('src', gameSelection[0].img);
-        $(".game-website").attr('href', gameSelection[0].url);
-        $(".enter-btn").addClass("hidden");
-        $(".restart-btn").removeClass("hidden");
+    let isOnFinalQuestion = (currentQuestion === 3);
+    if (isOnFinalQuestion) {
+        handleShowFinalGame()
     };
-    //hide previous question
-    let previousQuestion = $(".js-container")
-    [currentQuestion-1];
-    $(previousQuestion).slideUp(1000);
-    //show next question
+
+    handleShowNewQuestion();
+    handleUpdateProgressBar();
+};
+
+function handleShowNewQuestion() {
+    let previousQuestion = $(".js-container")[currentQuestion-1];
+    $(previousQuestion).slideUp(500);
     let nextQuestion = $(".js-container")[currentQuestion];
-    $(nextQuestion).slideToggle(1000);
-    //update progress bar
+    $(nextQuestion).slideToggle(500);
+};
+
+function handleUpdateProgressBar() {
     let progressLine = $(".progress-line")[currentQuestion-1];
     $(progressLine).css('background-position', 'left');
-    let boxImg = $(".game-img")[currentQuestion-1];
-    $(boxImg).attr('src', currentImg);
-    $(boxImg).css('opacity', '100');
+    let progressBoxImg = $(".game-img")[currentQuestion-1];
+    $(progressBoxImg).attr('src', selectedImg).css('opacity', '100');
     let progressBox = $(".progress-box")[currentQuestion];
     setTimeout(function(){
         $(progressBox).css('background', '#02833E');
     }, 1000);
 };
+
+function handleShowFinalGame() {
+    console.log(gameSelection);
+    $(".game-name").text(gameSelection[0].name);
+    let selectedGameImg = $(".game-img")[3];
+    $(selectedGameImg).attr('src', gameSelection[0].img);
+    $(".game-website").attr('href', gameSelection[0].url);
+    $(".enter-btn").addClass("hidden");
+    $(".restart-btn").removeClass("hidden");
+}
 
 $(".restart-btn").click(function(){
     location.reload();
