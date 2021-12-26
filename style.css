@@ -104,6 +104,11 @@ header h1, header h3 {
     background-size: 0;
 }
 
+.progress-box-img {
+    width: 100%;
+    transition: 1s;
+}
+
 .progress-line {
     border-top: 2px solid var(--blue);
     border-bottom: 2px solid var(--blue);
@@ -129,10 +134,6 @@ header h1, header h3 {
     padding: 0 10px;
 }
 
-.img-container {
-    max-width: 100px;
-}
-
 .answer {
     display: flex;
     flex-direction: column;
@@ -150,6 +151,10 @@ header h1, header h3 {
 
 .answer:hover {
     cursor: pointer;
+}
+
+.img-container {
+    max-width: 100px;
 }
 
 .answer img {
@@ -179,6 +184,7 @@ header h1, header h3 {
 .game-img {
     width: 100%;
     transition: 1s;
+    display: block;
 }
 
 /*Media Queries*/

@@ -56,6 +56,8 @@ $(".submit-btn").click(function() {
         };
         if (isOnIntensityQuestion) {
             gameSelection = gameSelection.filter(game => game.intensity == selectedAnswer);
+            handleShowFinalGame();
+            return;
         };
         $(".error-message").text("");
         handleQuestionChange();
@@ -64,11 +66,6 @@ $(".submit-btn").click(function() {
 });
 
 function handleQuestionChange() {
-    let isOnFinalQuestion = (questionNumber === 3);
-    if (isOnFinalQuestion) {
-        handleShowFinalGame();
-    };
-
     handleShowNewQuestion();
     handleUpdateProgressBar();
 };
@@ -83,7 +80,7 @@ function handleShowNewQuestion() {
 function handleUpdateProgressBar() {
     let progressLine = $(".progress-line")[questionNumber-1];
     $(progressLine).css('background-position', 'left');
-    let progressBoxImage = $(".game-img")[questionNumber-1];
+    let progressBoxImage = $(".progress-box-img")[questionNumber-1];
     $(progressBoxImage).attr('src', selectedAnswerImage).css('opacity', '100');
     let progressBox = $(".progress-box")[questionNumber];
     setTimeout(function(){
@@ -92,13 +89,15 @@ function handleUpdateProgressBar() {
 };
 
 function handleShowFinalGame() {
+    $(".js-game-img").on('load', function() {
+        handleShowNewQuestion();
+        handleUpdateProgressBar();
+    }); 
     $(".game-name").text(gameSelection[0].name);
     $(".js-game-img").attr('src', gameSelection[0].img);
     $(".game-website").attr('href', gameSelection[0].url);
     $(".submit-btn").addClass("hidden");
     $(".restart-btn").removeClass("hidden");
-    $('.js-game-img').on('load', function() {
-    });
 }
 
 $(".restart-btn").click(function(){
