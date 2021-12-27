@@ -2,6 +2,8 @@ let questionNumber = 1;
 let selectedAnswer = '';
 let selectedAnswerImage = '';
 let gameSelection = [];
+let canBeClicked = true;
+let transitionTime = 500;
 
 let games = [
     {name: 'Paladins: Champions of the Realm', console: 'playstation', genre: 'fps', intensity: 'casual', url: 'https://www.paladins.com/', img: './img/games/paladins.jpeg'},
@@ -39,17 +41,17 @@ $(".answer").click(function() {
 });
 
 $(".submit-btn").click(function() {
-    let isAnswerSelected = ($('.answer').hasClass("selected"));
+    let isAnswerSelected = ($('.answer').hasClass("selected") && selectedAnswerImage);
     let isOnConsoleQuestion = (questionNumber === 1);
     let isOnGenreQuestion = (questionNumber === 2);
     let isOnIntensityQuestion = (questionNumber === 3);
 
-    if (!isAnswerSelected) {
+    if ((!isAnswerSelected && canBeClicked) || (!selectedAnswerImage && canBeClicked)) {
         $(".error-message").text("Please select one of the answers.");
         return;
     };
 
-    if (isAnswerSelected) {
+    if (isAnswerSelected && canBeClicked) {
         if (isOnConsoleQuestion) {
             gameSelection = games.filter(game => game.console == selectedAnswer);
         };
@@ -58,6 +60,7 @@ $(".submit-btn").click(function() {
         };
         if (isOnIntensityQuestion) {
             gameSelection = gameSelection.filter(game => game.intensity == selectedAnswer);
+            $(".error-message").text("");
             handleShowFinalGame();
             return;
         };
@@ -70,13 +73,18 @@ $(".submit-btn").click(function() {
 function handleQuestionChange() {
     handleShowNewQuestion();
     handleUpdateProgressBar();
+    selectedAnswerImage = '';
 };
 
 function handleShowNewQuestion() {
     let questionJustAnswered = $(".js-container")[questionNumber-1];
-    $(questionJustAnswered).slideUp(500);
+    $(questionJustAnswered).slideUp(transitionTime);
     let newQuestion = $(".js-container")[questionNumber];
-    $(newQuestion).slideDown(500);
+    $(newQuestion).slideDown(transitionTime);
+    canBeClicked = false;
+    setTimeout(function(){
+        canBeClicked = true;
+    }, transitionTime);
 };
 
 function handleUpdateProgressBar() {
@@ -87,7 +95,7 @@ function handleUpdateProgressBar() {
     let progressBox = $(".progress-box")[questionNumber];
     setTimeout(function(){
         $(progressBox).css('background', '#02833E');
-    }, 500);
+    }, transitionTime);
 };
 
 function handleShowFinalGame() {
