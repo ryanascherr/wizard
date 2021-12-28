@@ -171,7 +171,7 @@ header h1, header h3 {
     filter: invert(100%) sepia(16%) saturate(7463%) hue-rotate(222deg) brightness(119%) contrast(115%);
 }
 
-.game-name, .game-website-container, .restart-btn {
+.game-name-container, .game-website-container, .restart-btn {
     margin-top: 15px;
 }
 

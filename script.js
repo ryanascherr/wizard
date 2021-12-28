@@ -2,8 +2,8 @@ let questionNumber = 1;
 let selectedAnswer = '';
 let selectedAnswerImage = '';
 let gameSelection = [];
-let canBeClicked = true;
-let transitionTime = 500;
+let isDuringQuestionTransition = false;
+let questionTransitionTime = 500;
 
 let games = [
     {name: 'Paladins: Champions of the Realm', console: 'playstation', genre: 'fps', intensity: 'casual', url: 'https://www.paladins.com/', img: './img/games/paladins.jpeg'},
@@ -41,17 +41,17 @@ $(".answer").click(function() {
 });
 
 $(".submit-btn").click(function() {
-    let isAnswerSelected = ($('.answer').hasClass("selected") && selectedAnswerImage);
+    let isAnswerSelected = ($(".answer").hasClass("selected") && selectedAnswerImage);
     let isOnConsoleQuestion = (questionNumber === 1);
     let isOnGenreQuestion = (questionNumber === 2);
     let isOnIntensityQuestion = (questionNumber === 3);
 
-    if ((!isAnswerSelected && canBeClicked) || (!selectedAnswerImage && canBeClicked)) {
+    if ((!isAnswerSelected && !isDuringQuestionTransition) || (!selectedAnswerImage && !isDuringQuestionTransition)) {
         $(".error-message").text("Please select one of the answers.");
         return;
     };
 
-    if (isAnswerSelected && canBeClicked) {
+    if (isAnswerSelected && !isDuringQuestionTransition) {
         if (isOnConsoleQuestion) {
             gameSelection = games.filter(game => game.console == selectedAnswer);
         };
@@ -78,34 +78,36 @@ function handleQuestionChange() {
 
 function handleShowNewQuestion() {
     let questionJustAnswered = $(".js-container")[questionNumber-1];
-    $(questionJustAnswered).slideUp(transitionTime);
+    $(questionJustAnswered).slideUp(questionTransitionTime);
     let newQuestion = $(".js-container")[questionNumber];
-    $(newQuestion).slideDown(transitionTime);
-    canBeClicked = false;
+    $(newQuestion).slideDown(questionTransitionTime);
+    isDuringQuestionTransition = true;
     setTimeout(function(){
-        canBeClicked = true;
-    }, transitionTime);
+        isDuringQuestionTransition = false;
+    }, questionTransitionTime);
 };
 
 function handleUpdateProgressBar() {
     let progressLine = $(".progress-line")[questionNumber-1];
-    $(progressLine).css('background-position', 'left');
     let progressBoxImage = $(".progress-box-img")[questionNumber-1];
-    $(progressBoxImage).attr('src', selectedAnswerImage).css('opacity', '100');
     let progressBox = $(".progress-box")[questionNumber];
+
+    $(progressLine).css('background-position', 'left');
+    $(progressBoxImage).attr('src', selectedAnswerImage).css('opacity', '100');
+
     setTimeout(function(){
         $(progressBox).css('background', '#02833E');
-    }, transitionTime);
+    }, questionTransitionTime);
 };
 
 function handleShowFinalGame() {
     $(".js-game-img").on('load', function() {
         handleShowNewQuestion();
         handleUpdateProgressBar();
-    }); 
-    $(".game-name").text(gameSelection[0].name);
+    });
     $(".js-game-img").attr('src', gameSelection[0].img);
-    $(".game-website").attr('href', gameSelection[0].url);
+    $(".js-game-name").text(gameSelection[0].name);
+    $(".js-game-website").attr('href', gameSelection[0].url);
     $(".submit-btn").addClass("hidden");
     $(".restart-btn").removeClass("hidden");
 }
