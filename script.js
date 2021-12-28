@@ -41,12 +41,12 @@ $(".answer").click(function() {
 });
 
 $(".submit-btn").click(function() {
-    let isAnswerSelected = ($(".answer").hasClass("selected") && selectedAnswerImage);
+    let isAnswerSelected = $(".answer").hasClass("selected");
     let isOnConsoleQuestion = (questionNumber === 1);
     let isOnGenreQuestion = (questionNumber === 2);
     let isOnIntensityQuestion = (questionNumber === 3);
 
-    if ((!isAnswerSelected && !isDuringQuestionTransition) || (!selectedAnswerImage && !isDuringQuestionTransition)) {
+    if (!isAnswerSelected && !isDuringQuestionTransition) {
         $(".error-message").text("Please select one of the answers.");
         return;
     };
@@ -64,6 +64,7 @@ $(".submit-btn").click(function() {
             handleShowFinalGame();
             return;
         };
+        $(".answer").removeClass("selected");
         $(".error-message").text("");
         handleQuestionChange();
         questionNumber++;
@@ -113,5 +114,7 @@ function handleShowFinalGame() {
 }
 
 $(".restart-btn").click(function(){
-    location.reload();
+    if (!isDuringQuestionTransition) {
+        location.reload();
+    }
 })
