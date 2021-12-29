@@ -2,8 +2,8 @@ let questionNumber = 1;
 let selectedAnswer = '';
 let selectedAnswerImage = '';
 let gameSelection = [];
-let isDuringQuestionTransition = false;
 let questionTransitionTime = 500;
+let isDuringQuestionTransition = false;
 
 let games = [
     {name: 'Paladins: Champions of the Realm', console: 'playstation', genre: 'fps', intensity: 'casual', url: 'https://www.paladins.com/', img: './img/games/paladins.jpeg'},
@@ -74,15 +74,16 @@ $(".submit-btn").click(function() {
 function handleQuestionChange() {
     handleShowNewQuestion();
     handleUpdateProgressBar();
-    selectedAnswerImage = '';
 };
 
 function handleShowNewQuestion() {
     let questionJustAnswered = $(".js-container")[questionNumber-1];
-    $(questionJustAnswered).slideUp(questionTransitionTime);
     let newQuestion = $(".js-container")[questionNumber];
+
+    $(questionJustAnswered).slideUp(questionTransitionTime);
     $(newQuestion).slideDown(questionTransitionTime);
     isDuringQuestionTransition = true;
+    
     setTimeout(function(){
         isDuringQuestionTransition = false;
     }, questionTransitionTime);
