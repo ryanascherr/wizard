@@ -158,10 +158,10 @@ $(".answer").click(function() {
     selectedAnswer = $(this).data("answer");
     selectedAnswerImage = $(this).data("img");
 
-    if (!isAnswerSelected) {
-        $(".answer").removeClass("selected");
-        $(this).addClass("selected");
-    }
+    if (isAnswerSelected) return;
+
+    $(".answer").removeClass("selected");
+    $(this).addClass("selected");
 });
 
 $(".submit-btn").click(function() {
@@ -170,29 +170,32 @@ $(".submit-btn").click(function() {
     let isOnGenreQuestion = (questionNumber === 2);
     let isOnIntensityQuestion = (questionNumber === 3);
 
-    if (!isAnswerSelected && !isDuringQuestionTransition) {
+    if (isDuringQuestionTransition) return;
+
+    if (!isAnswerSelected) {
         $(".error-message").text("Please select one of the answers.");
         return;
     };
 
-    if (isAnswerSelected && !isDuringQuestionTransition) {
-        if (isOnConsoleQuestion) {
-            gameSelection = games.filter(game => game.console == selectedAnswer);
-        };
-        if (isOnGenreQuestion) {
-            gameSelection = gameSelection.filter(game => game.genre == selectedAnswer);
-        };
-        if (isOnIntensityQuestion) {
-            gameSelection = gameSelection.filter(game => game.intensity == selectedAnswer);
-            $(".error-message").text("");
-            handleShowFinalGame();
-            return;
-        };
-        $(".answer").removeClass("selected");
+    if (isOnConsoleQuestion) {
+        gameSelection = games.filter(game => game.console == selectedAnswer);
+    };
+    if (isOnGenreQuestion) {
+        gameSelection = gameSelection.filter(game => game.genre == selectedAnswer);
+    };
+    if (isOnIntensityQuestion) {
+        gameSelection = gameSelection.filter(game => game.intensity == selectedAnswer);
         $(".error-message").text("");
-        handleQuestionChange();
-        questionNumber++;
-    }
+        handleShowFinalGame();
+        return;
+    };
+
+    $(".answer").removeClass("selected");
+    $(".error-message").text("");
+
+    handleQuestionChange();
+
+    questionNumber++;
 });
 
 function handleQuestionChange() {
@@ -239,7 +242,7 @@ function handleShowFinalGame() {
 }
 
 $(".restart-btn").click(function(){
-    if (!isDuringQuestionTransition) {
-        location.reload();
-    }
+    if (isDuringQuestionTransition) return;
+    
+    location.reload();
 })
