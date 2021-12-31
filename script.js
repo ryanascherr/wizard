@@ -1,11 +1,10 @@
 let questionNumber = 1;
-let selectedAnswer = '';
-let selectedAnswerImage = '';
-let gameSelection = [];
 let questionTransitionTime = 500;
 let isDuringQuestionTransition = false;
+let selectedAnswer = '';
+let selectedAnswerImage = '';
 
-let games = [
+let gameSelection = [
     {
         name: 'Paladins: Champions of the Realm',
         console: 'playstation',
@@ -178,7 +177,7 @@ $(".submit-btn").click(function() {
     };
 
     if (isOnConsoleQuestion) {
-        gameSelection = games.filter(game => game.console == selectedAnswer);
+        gameSelection = gameSelection.filter(game => game.console == selectedAnswer);
     };
     if (isOnGenreQuestion) {
         gameSelection = gameSelection.filter(game => game.genre == selectedAnswer);
