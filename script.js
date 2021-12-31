@@ -3,6 +3,7 @@ let questionTransitionTime = 500;
 let isDuringQuestionTransition = false;
 let selectedAnswer = '';
 let selectedAnswerImage = '';
+let isOnFinalQuestion = false;
 
 let gameSelection = [
     {
@@ -165,41 +166,56 @@ $(".answer").click(function() {
 
 $(".submit-btn").click(function() {
     let isAnswerSelected = $(".answer").hasClass("selected");
-    let isOnConsoleQuestion = (questionNumber === 1);
-    let isOnGenreQuestion = (questionNumber === 2);
-    let isOnIntensityQuestion = (questionNumber === 3);
 
     if (isDuringQuestionTransition) return;
 
+    handleErrorMessage(isAnswerSelected);
+
+    if (!isAnswerSelected) return;
+
+    handleFilterGameSelection();
+
+    $(".answer").removeClass("selected");
+
+    handleQuestionChange();
+});
+
+function handleErrorMessage(isAnswerSelected) {
     if (!isAnswerSelected) {
-        $(".error-message").text("Please select one of the answers.");
+        $(".js-error-message").text("Please select one of the answers.");
         return;
-    };
+    }
+
+    $(".js-error-message").text("");
+}
+
+function handleFilterGameSelection() {
+    let isOnConsoleQuestion = (questionNumber === 1);
+    let isOnGenreQuestion = (questionNumber === 2);
 
     if (isOnConsoleQuestion) {
         gameSelection = gameSelection.filter(game => game.console == selectedAnswer);
+        return;
     };
     if (isOnGenreQuestion) {
         gameSelection = gameSelection.filter(game => game.genre == selectedAnswer);
-    };
-    if (isOnIntensityQuestion) {
-        gameSelection = gameSelection.filter(game => game.intensity == selectedAnswer);
-        $(".error-message").text("");
-        handleShowFinalGame();
         return;
     };
 
-    $(".answer").removeClass("selected");
-    $(".error-message").text("");
-
-    handleQuestionChange();
-
-    questionNumber++;
-});
+    gameSelection = gameSelection.filter(game => game.intensity == selectedAnswer);
+    isOnFinalQuestion = true;
+}
 
 function handleQuestionChange() {
+    if (isOnFinalQuestion) {
+        handleShowFinalGame();
+        return;
+    };
+    
     handleShowNewQuestion();
     handleUpdateProgressBar();
+
+    questionNumber++;
 };
 
 function handleShowNewQuestion() {
