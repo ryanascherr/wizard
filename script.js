@@ -181,12 +181,10 @@ $(".submit-btn").click(function() {
 });
 
 function handleErrorMessage(isAnswerSelected) {
-    if (!isAnswerSelected) {
-        $(".js-error-message").text("Please select one of the answers.");
-        return;
-    }
+    let errorMessage = $(".js-error-message");
+    let newMessage = isAnswerSelected ? "" : "Please select one of the answers."
 
-    $(".js-error-message").text("");
+    errorMessage.text(newMessage);
 }
 
 function handleFilterGameSelection() {
