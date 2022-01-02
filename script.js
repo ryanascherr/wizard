@@ -152,16 +152,17 @@ let gameSelection = [
     }
 ];
 
-$(".answer").click(function() {
-    let isAnswerSelected = ($(this).hasClass("selected"));
+$(".answer").click(function(event) {
+    let target = $(event.currentTarget);
+    let isAnswerSelected = target.hasClass("selected");
 
-    selectedAnswer = $(this).data("answer");
-    selectedAnswerImage = $(this).data("img");
+    selectedAnswer = target.data("answer");
+    selectedAnswerImage = target.data("img");
 
     if (isAnswerSelected) return;
 
     $(".answer").removeClass("selected");
-    $(this).addClass("selected");
+    target.addClass("selected");
 });
 
 $(".submit-btn").click(function() {
@@ -174,9 +175,6 @@ $(".submit-btn").click(function() {
     if (!isAnswerSelected) return;
 
     handleFilterGameSelection();
-
-    $(".answer").removeClass("selected");
-
     handleQuestionChange();
 });
 
@@ -205,6 +203,8 @@ function handleFilterGameSelection() {
 }
 
 function handleQuestionChange() {
+    $(".answer").removeClass("selected");
+    
     if (isOnFinalQuestion) {
         handleShowFinalGame();
         return;
