@@ -165,7 +165,19 @@ $(".answer").click(function(event) {
     target.addClass("selected");
 });
 
+$(document).on('keypress',function(e) {
+    const enterKey = 13;
+
+    if (isOnFinalQuestion || e.keyCode !== enterKey) return;
+    
+    handleSubmitAnswer();
+});
+
 $(".submit-btn").click(function() {
+    handleSubmitAnswer();
+});
+
+function handleSubmitAnswer() {
     let isAnswerSelected = $(".answer").hasClass("selected");
 
     if (isDuringQuestionTransition) return;
@@ -176,7 +188,7 @@ $(".submit-btn").click(function() {
 
     handleFilterGameSelection();
     handleQuestionChange();
-});
+}
 
 function handleErrorMessage(isAnswerSelected) {
     let errorMessage = $(".js-error-message");
