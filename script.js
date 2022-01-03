@@ -152,7 +152,11 @@ let gameSelection = [
     }
 ];
 
-$(".answer").click(function(event) {
+$(".answer").on('focus click', function(event){
+    handleSelectAnswer(event);
+})
+
+function handleSelectAnswer(event) {
     let target = $(event.currentTarget);
     let isAnswerSelected = target.hasClass("selected");
 
@@ -163,7 +167,7 @@ $(".answer").click(function(event) {
 
     $(".answer").removeClass("selected");
     target.addClass("selected");
-});
+}
 
 $(document).on('keypress',function(e) {
     const enterKey = 13;
